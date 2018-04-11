@@ -1,4 +1,4 @@
-# !!! le cas où la date d'arrivée est après minuit n'est pas encore implémentée !
+# !!! le cas où la date d'arrivée est après minuit ET l'année suivante n'est pas encore implémentée !
 
 import locale
 from datetime import datetime
@@ -47,6 +47,8 @@ date_aller_arrivee = date_aller_d + timedelta(
     hours=int(heure_arrivee_aller.split("h")[0]), 
     minutes=int(heure_arrivee_aller.split("h")[1])
 )
+if (date_aller_arrivee.hour < date_aller_depart):
+    date_aller_arrivee = date_aller_arrivee + timedelta(hours=24)
 
 # pour le retour
 if (date_retour != ""):
@@ -63,6 +65,9 @@ if (date_retour != ""):
         hours=int(heure_arrivee_retour.split("h")[0]), 
         minutes=int(heure_arrivee_retour.split("h")[1])
     )
+    
+    if (date_retour_arrivee.hour < date_retour_depart):
+        date_retour_arrivee = date_retour_arrivee + timedelta(hours=24)
 
 infos =  {
     'trajet_aller': lieu_depart + ' -> ' + lieu_arrivee,
